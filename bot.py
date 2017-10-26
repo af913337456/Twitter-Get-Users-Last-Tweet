@@ -18,7 +18,7 @@ auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
 api = ty.API(auth)
 
 #Set Users
-screen_name = ['dhennessy86' , 'GossiTheDog']
+screen_name = ['<enter screen name>' , '<enter screen name>']
 
 #Create User output CSV files
 for user in screen_name:
@@ -30,8 +30,8 @@ def getUsersTweet(api):
 	global message
 	global User_Tweet_id
 	global User_Tweet
-	for user in screen_name:  											# Loop through users , posting to hipchat , terminal and into uniq csv
-		r = api.user_timeline(user , count = 1)  						# count sets the no of tweets to rx
+	for user in screen_name:  							
+		r = api.user_timeline(user , count = 1)  		# count sets the no of tweets to rx
 		i = 0
 		while i < len(r):
 			User_Tweets = r[i]
@@ -46,24 +46,17 @@ def getUsersTweet(api):
 				writer.writerow([User_Tweet, User_Tweets.created_at , User_Tweet_id ])
 			i += 1
 
-
-        
-
-    r = requests.post(url, data=json.dumps(payload), headers=headers)
-    r.raise_for_status()
-    print "Sent tweet to Hip Chat Room"
-
 while True: 
 	#Main Driver Script
 	if __name__ == "__main__":
 		old_id = User_Tweet_id
 		getUsersTweet(api)
-		time.sleep(6.0 - ((time.time() - starttime) % 6.0))				# Sets the time for the script to sleep , change both numbers , 5 = 5secs
-		if User_Tweet_id == old_id:										# Loop through tweet id untill user sends new tweet
-			print "No new Tweets +6 sec"								# if id's are same pass
+		time.sleep(6.0 - ((time.time() - starttime) % 6.0))	# Sets the time for the script to sleep , change both numbers , 5 = 5secs
+		if User_Tweet_id == old_id:				# Loop through tweet id untill user sends new tweet
+			print "No new Tweets +6 sec"			# if id's are same pass
 			Notify = False
 			pass
-		else:															# new id means new tweet, post tweet
+		else:							# new id means new tweet, post tweet
 			print message
 			Notify = True
 
