@@ -45,28 +45,10 @@ def getUsersTweet(api):
 				writer = csv.writer(f)
 				writer.writerow([User_Tweet, User_Tweets.created_at , User_Tweet_id ])
 			i += 1
-	
-def hipchat_notify(token, room, message, color='green', notify=False,format='text', host='hipchat.esentire.com'):
+
 
         
-# Detecting errors with message
-    if len(message) > 10000:
-        raise ValueError('Message too long')
-    if format not in ['text', 'html']:
-        raise ValueError("Invalid message format '{0}'".format(format))
-    if color not in ['yellow', 'green', 'red', 'purple', 'gray', 'random']:
-        raise ValueError("Invalid color {0}".format(color))
-    if not isinstance(notify, bool):
-        raise TypeError("Notify must be boolean")
-    url = "https://{0}/v2/room/{1}/notification".format(host, room)
-    headers = {'Content-type': 'application/json'}
-    headers['Authorization'] = "Bearer " + token
-    payload = {
-       'message': message,
-        'notify': notify,
-        'message_format': format,
-        'color': color
-    }
+
     r = requests.post(url, data=json.dumps(payload), headers=headers)
     r.raise_for_status()
     print "Sent tweet to Hip Chat Room"
@@ -83,7 +65,6 @@ while True:
 			pass
 		else:															# new id means new tweet, post tweet
 			print message
-			#hipchat_notify('eFC3HIp2Al1jkhraT4LBtJxt7jCdSq6TrW1u7Zqz','612', message) 
 			Notify = True
 
 			
