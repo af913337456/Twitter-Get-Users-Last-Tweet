@@ -52,4 +52,4 @@ while True:
 	#Main Driver Script
 	if __name__ == "__main__":
 		getUsersTweet(api)
-		time.sleep(240.0 - ((time.time() - starttime) % 240cal.0))				# Sets the time for the script to sleep , change both numbers , 5 = 5secs
+		time.sleep(240.0 - ((time.time() - starttime) % 240.0))				# Sets the time for the script to sleep , change both numbers , 5 = 5secs
